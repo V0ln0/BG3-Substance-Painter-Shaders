@@ -15,9 +15,8 @@
 import lib-pbr.glsl
 import lib-bent-normal.glsl
 import lib-emissive.glsl
-import lib-pom.glsl
-import lib-sss.glsl
 import lib-utils.glsl
+import lib-alpha-test.glsl
 
 //- Declare the iray mdl material to use with this shader.
 //: metadata {
@@ -34,6 +33,20 @@ uniform SamplerSparse metallic_tex;
 uniform SamplerSparse specularlevel_tex;
 //: param auto channel_user0
 uniform SamplerSparse MSKcloth_tex;
+
+
+//: param custom {
+//:   "group": "Geometry/Opacity",
+//:   "label": "Enable alpha blending",
+//:   "default": false,
+//:   "asm": "opacity",
+//:   "description": "<html><head/><body><p>Uses the opacity texture to progressively blend the transparent surface over the background.<br/><b>Please note</b>: The following channel needs to be present for this parameter to have an effect: <b>Opacity</b></p></body></html>",
+//:   "enable": "!input.sssEnabled",
+//:   "description_disabled": "<html><head/><body><p>Disable the <b>Subsurface Scattering</b> to use <b>Alpha blending</b>.</p></body></html>"
+//: }
+
+uniform_specialization bool alphaBlendEnabled;
+//: state blend over {"enable":"input.alphaBlendEnabled && !input.sssEnabled && !input.translucencyEnabled"}
 
 
 //: param custom { "default": [0.091518, 0.091518, 0.136099], "label": "Cloth Primary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
@@ -100,9 +113,7 @@ vec3 MSKmaskMix(vec3 Masks, vec3 ColourA, vec3 ColourB, vec3 ColourC)
 
 void shade(V2F inputs)
 {
-  // Apply parallax occlusion mapping if possible
-  vec3 viewTS = worldSpaceToTangentSpace(getEyeVec(inputs.position), inputs);
-  applyParallaxOffset(inputs, viewTS);
+
 	
   
   //BG3 SPECIFIC
@@ -144,11 +155,10 @@ void shade(V2F inputs)
   LocalVectors vectors = computeLocalFrame(inputs);
   computeBentNormal(vectors,inputs);
 
-  // Feed parameters for a physically based BRDF integration
   emissiveColorOutput(pbrComputeEmissive(emissive_tex, inputs.sparse_coord));
   albedoOutput(diffColor);
   diffuseShadingOutput(occlusion * shadowFactor * envIrradiance(getDiffuseBentNormal(vectors)));
   specularShadingOutput(specOcclusion * pbrComputeSpecular(vectors, specColor, roughness, occlusion, getBentNormalSpecularAmount()));
-  sssCoefficientsOutput(getSSSCoefficients(inputs.sparse_coord));
-  sssColorOutput(getSSSColor(inputs.sparse_coord));
+
+  alphaKill(inputs.sparse_coord);
 }
