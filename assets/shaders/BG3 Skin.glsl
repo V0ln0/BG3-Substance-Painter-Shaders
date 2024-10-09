@@ -1,6 +1,7 @@
 // ==========================
 //  BG3 Skin Shader by Volno
 // ==========================
+//  v 2.0.0
 // Nexus Mods (https://next.nexusmods.com/profile/Volno/about-me)
 // GitHub (https://github.com/V0ln0/BG3-Substance-Painter-Shaders)
 // Discord @Volno
@@ -139,6 +140,16 @@ uniform float RoughnessAmount;
 //: param custom { "default": false, "label": "Lighting Toggle", "group": "Utilities"  }
 uniform bool LightingToggle;
 
+// !!UTILITES EXPLINATION!!
+//
+// Channels user7, user8, & user9 ("Utility Channels", or UTL) have a duel use
+// When MSK_Channel_Toggle = true, the shader will use UTL_Map_tex inplace of channel data for the **CancelMSK** (MelaninRemoval, Internals Mask, NonSkin)
+// When MSK_Channel_Toggle = false, the shader will use UTL_Map_tex inplace of channel data for the **AtlasMap** (Tattoos, makeup, gith spots)
+//
+// This was done to reduce the amount of userchannels + make things more managable
+// this thing already uses 15 channels, I refuse to use more
+
+
 //: param custom { "default": false, "label": "MSK Toggle", "group": "Utilities"  }
 uniform bool MSK_Channel_Toggle;
 
@@ -166,7 +177,7 @@ uniform vec3 ULT_R_Colour;
 //: }
 uniform float ULT_G_Influence;
 
-//: param custom { "default": [0.0, 0.0, 1.0], "label": "Utility Colour G", "group": "Utilities", "widget": "color" } 
+//: param custom { "default": [0.0, 1.0, 0.0], "label": "Utility Colour G", "group": "Utilities", "widget": "color" } 
 uniform vec3 ULT_G_Colour;
 
 //: param custom {
@@ -178,7 +189,7 @@ uniform vec3 ULT_G_Colour;
 //: }
 uniform float ULT_B_Influence;
 
-//: param custom { "default": [0.0, 1.0, 0.0], "label": "Utility Colour B", "group": "Utilities", "widget": "color" } 
+//: param custom { "default": [0.0, 0.0, 1.0], "label": "Utility Colour B", "group": "Utilities", "widget": "color" } 
 uniform vec3 ULT_B_Colour;
 
 
@@ -204,7 +215,7 @@ void shade(V2F inputs) {
 
     vec3 CancelMSK_R = textureSparse(L7_UTL_1_tex, inputs.sparse_coord).xyz;
     vec3 CancelMSK_G = textureSparse(L8_UTL_2_tex, inputs.sparse_coord).xyz;
-    vec3 CancelMSK_B = textureSparse(L8_UTL_2_tex, inputs.sparse_coord).xyz;
+    vec3 CancelMSK_B = textureSparse(L9_UTL_3_tex, inputs.sparse_coord).xyz;
     vec3 BMmap = textureSparse(L10_BM_tex, inputs.sparse_coord).xyz;
     vec4 CLEA = vec4(Curvature.x, Hair.x, Lips.x, AO);
     
@@ -252,6 +263,7 @@ void shade(V2F inputs) {
         (ULT_R_Colour * AtlasCurvature.x) +
         (ULT_G_Colour * AtlasCurvature.y) +
         (ULT_B_Colour * AtlasCurvature.z);
+
     vec3 WithAtlas = (HMVY_Final * (1.0 - dot(AtlasColour, vec3(1.0)))) + AtlasColour; 
     vec3 WithHair = mix(WithAtlas, HairColour, CLEA.y);
     vec3 WithMakeup = mix(WithHair, MakeupColour, (MakeupInfluence * CLEA.z));

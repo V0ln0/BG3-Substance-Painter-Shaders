@@ -1,9 +1,9 @@
 // ==========================
 //  BG3 Armour Tint by Volno
 // ==========================
+//  v 2.0.0
 // Nexus Mods (https://next.nexusmods.com/profile/Volno/about-me)
 // Discord @Volno
-// The following is an modification of Adobe's 'Substance 3D Painter Metal/Rough PBR shader' which has been edited for the creation of armour for use in BG3.
 // You are free to modify, share, and adapt the file I have made freely, provided that you: 
 // 1. give credit to me as the original creator
 // 2. that you do not put the file behind a paywall
@@ -11,10 +11,7 @@
 // Happy Modding
 
 
-//- Substance 3D Painter Metal/Rough PBR shader
-//- ====================================
-//-
-//- Import from libraries.
+
 import lib-pbr.glsl
 import lib-bent-normal.glsl
 import lib-emissive.glsl
@@ -78,6 +75,9 @@ uniform vec3 C2_Colour;
 //: param custom { "default": false, "label": "Colour Toggle", "group": "BG3 Colour Settings"  }
 uniform bool ColourToggle;
 
+
+// takes the MSKcloth map colours and turns it into a pure red, green, and blue image depending on the 'catagory'. (ie, cloth, leather, metal, exta)
+// other 'catagories' are removed, so you end up with an RGB map for just one type. Only put colours for one catagory into it.
 vec3 MSKmaskFinder(vec3 InputMap, vec3 Colour1, vec3 Colour2, vec3 Colour3)
 { 	
 	float MSKthreshold = 0.25;
@@ -87,6 +87,7 @@ vec3 MSKmaskFinder(vec3 InputMap, vec3 Colour1, vec3 Colour2, vec3 Colour3)
 	return (MSkmaskGrabClamped);	
 }
 
+// takes the RGB map from MSKmaskFinder and adds user selected colours
 vec3 MSKmaskMix(vec3 Masks, vec3 ColourA, vec3 ColourB, vec3 ColourC)
 {
 	vec3 MaskedColours = 
