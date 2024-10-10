@@ -1,15 +1,12 @@
 // ==========================
-//  BG3 Armour Tint by Volno
+//  BG3 Armour by Volno
 // ==========================
 //  v 2.0.0
 // Nexus Mods (https://next.nexusmods.com/profile/Volno/about-me)
+// GitHub (https://github.com/V0ln0/BG3-Substance-Painter-Shaders)
 // Discord @Volno
-// You are free to modify, share, and adapt the file I have made freely, provided that you: 
-// 1. give credit to me as the original creator
-// 2. that you do not put the file behind a paywall
-// 3. that you give others the same rights to modify the work as I have here.
-// Happy Modding
-
+// this software is licenced under a Attribution-ShareAlike 4.0 International (CC-BY-SA-4.0) licence
+// https://creativecommons.org/licenses/by-sa/4.0/
 
 
 import lib-pbr.glsl
