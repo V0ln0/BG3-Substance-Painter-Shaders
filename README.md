@@ -11,5 +11,17 @@ There is also a PDF containing an in-depth guide containing more detailed inform
 3. You're done, for further instructions see the provided PDF guide. 
 
 ## Currently Supported Shaders
-- Skin
-- Armour
+## Skin
+
+![Baldur's Gate 3 Shaders for Substance Painter - Unofficial Texturing Resources.](https://github.com/V0ln0/BG3-Substance-Painter-Shaders/blob/main/Screenshots/Skin_compare.png)
+
+Gives you full control the character's skin colour using the same paramaters found in-game, said paramaters are also fully compartible with vaules found Baldur's Gate 3 files; allowing you to work with as much accuracy as possible. 
+While some features have been omited from the full in-game verison of the shader for the sake of efficency, you are still provided with a number of additional features ontop of the skin colour. 
+These include:
+- Bodyhair colour
+- Non-Skin features (such as the 'teifling hornplates' and nails/claws)
+- Tattoo/makeup atlas'
+
+  
+## Armour
+![Baldur's Gate 3 Shaders for Substance Painter - Unofficial Texturing Resources.](https://github.com/V0ln0/BG3-Substance-Painter-Shaders/blob/main/Screenshots/Workspace_Armour.png)
