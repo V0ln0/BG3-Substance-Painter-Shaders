@@ -233,7 +233,13 @@ void shade(V2F inputs) {
             AtlasMap = vec3(CancelMSK_R.x, CancelMSK_G.x, CancelMSK_B.x);
         }
     
-    vec3 AtlasCurvature = (AtlasMap * vec3(CLEA.x)) * AtlasInfluence;
+    vec3 AtlasContribution = (vec3(CLEA.x) * dot(AtlasMap, AtlasInfluence));
+    vec3 AtlasCurvature = (AtlasMap * vec3(CLEA.x));
+    vec3 AtlasColour = 
+        (ULT_R_Colour * vec3(AtlasCurvature.x)) +
+        (ULT_G_Colour * vec3(AtlasCurvature.y)) +
+        (ULT_B_Colour * vec3(AtlasCurvature.z));
+
 
     float BruisesMelanin = 1.0 - HMVY.y; 
     float MelaninDark = mix(
@@ -256,12 +262,9 @@ void shade(V2F inputs) {
     vec3 HMVLuminance = vec3(dot(HemoglobinMelaninYellowing, vec3(0.2126, 0.7152, 0.0722)));
     vec3 HMVY_Final = mix(HMVLuminance, HemoglobinMelaninYellowing, vec3((-HemoglobinExponent * MelaninExponent + 1.0)));
     
-    vec3 AtlasColour = 
-        (ULT_R_Colour * AtlasCurvature.x) +
-        (ULT_G_Colour * AtlasCurvature.y) +
-        (ULT_B_Colour * AtlasCurvature.z);
 
-    vec3 WithAtlas = (HMVY_Final * (1.0 - dot(AtlasColour, vec3(1.0)))) + AtlasColour; 
+
+    vec3 WithAtlas = (HMVY_Final * (1.0 - dot(AtlasCurvature, vec3(1.0)))) + AtlasColour; 
     vec3 WithHair = mix(WithAtlas, HairColour, CLEA.y);
     vec3 WithMakeup = mix(WithHair, MakeupColour, (MakeupInfluence * CLEA.z));
     vec3 BMmapWithColour = BMmap.x * NonSkinColour;
