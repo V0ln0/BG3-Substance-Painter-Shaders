@@ -1,7 +1,7 @@
 // ==========================
 //  BG3 Armour by Volno
 // ==========================
-//  v 2.0.0
+//  v 3.0.1
 // Nexus Mods (https://next.nexusmods.com/profile/Volno/about-me)
 // GitHub (https://github.com/V0ln0/BG3-Substance-Painter-Shaders)
 // Discord @Volno
