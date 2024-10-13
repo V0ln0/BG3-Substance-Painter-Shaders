@@ -39,5 +39,5 @@ The velvet effect found on some assets in-game is currently unsupported.
 - [Bringing Life to Legends: Character Art in Baldur’s Gate 3](https://www.adobe.com/products/substance3d/magazine/bringing-life-to-legends-character-art-in-baldurs-gate-3.html)
 - [The Art and Technology Behind Creating Characters for Baldur’s Gate 3 | Adobe Substance 3D](https://www.youtube.com/watch?v=CVa4HJzHb_o)
 
-
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L3L6QT2OG)
 [![BG3 Modding Community Discord](https://i.imgur.com/r4g8fs4.png)](https://discord.com/invite/bg3mods)
