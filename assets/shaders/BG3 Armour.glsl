@@ -28,6 +28,8 @@ uniform SamplerSparse roughness_tex;
 uniform SamplerSparse metallic_tex;
 //: param auto channel_specularlevel
 uniform SamplerSparse specularlevel_tex;
+//: param auto channel_ambientocclusion
+uniform SamplerSparse channel_ambientocclusion;
 //: param auto channel_user0
 uniform SamplerSparse MSKcloth_tex;
 
@@ -45,45 +47,59 @@ uniform SamplerSparse MSKcloth_tex;
 uniform_specialization bool alphaBlendEnabled;
 //: state blend over {"enable":"input.alphaBlendEnabled && !input.sssEnabled && !input.translucencyEnabled"}
 
+//: param custom {
+//:   "group": "Geometry",
+//:   "label": "Back-face Culling",
+//:   "default": false,
+//:   "description": "<html><head/><body><p>When enabled, the surface is visible on both sides, i.e. back-face culling is disabled.</p></body></html>"
+//: }
+uniform_specialization bool doubleSided;
+//: state cull_face off {"enable":"input.doubleSided"}
 
-//: param custom { "default": [0.091518, 0.091518, 0.136099], "label": "Cloth Primary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom {
+//:   "label": "Colour Toggle",
+//:   "group": "Baldur's Gate 3/Colour",
+//:   "default": true,
+//:   "description": "<html><head/><body><p>Controls the colour overlay, when disabled only the <b>Base Colour</b> channel will show.</p></body></html>"
+//: }
+uniform bool ColourToggle;
+
+//: param custom { "default": [0.091518, 0.091518, 0.136099], "label": "Cloth Primary Colour", "group": "Baldur's Gate 3/Colour/Cloth", "widget": "color" } 
 uniform vec3 CP_Colour;
 
-//: param custom { "default": [0.43134, 0.163641, 0.238828], "label": "Cloth Secondary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.43134, 0.163641, 0.238828], "label": "Cloth Secondary Colour", "group": "Baldur's Gate 3/Colour/Cloth", "widget": "color" } 
 uniform vec3 CS_Colour;
 
-//: param custom { "default": [0.190463, 0.186989, 0.197516], "label": "Cloth Tertiary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.190463, 0.186989, 0.197516], "label": "Cloth Tertiary Colour", "group": "Baldur's Gate 3/Colour/Cloth", "widget": "color" } 
 uniform vec3 CT_Colour;
 
-//: param custom { "default": [0.263175, 0.183549, 0.136099], "label": "Leather Primary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.263175, 0.183549, 0.136099], "label": "Leather Primary Colour", "group": "Baldur's Gate 3/Colour/Leather", "widget": "color" } 
 uniform vec3 LP_Colour;
 
-//: param custom { "default": [0.073828, 0.063815, 0.136099], "label": "Leather Secondary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.073828, 0.063815, 0.136099], "label": "Leather Secondary Colour", "group": "Baldur's Gate 3/Colour/Leather", "widget": "color" } 
 uniform vec3 LS_Colour;
 
-//: param custom { "default": [0.121986, 0.060032, 0.051122], "label": "Leather Tertiary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.121986, 0.060032, 0.051122], "label": "Leather Tertiary Colour", "group": "Baldur's Gate 3/Colour/Leather", "widget": "color" } 
 uniform vec3 LT_Colour;
 
-//: param custom { "default": [0.91575, 0.804559, 0.442323], "label": "Metal Primary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.91575, 0.804559, 0.442323], "label": "Metal Primary Colour", "group": "Baldur's Gate 3/Colour/Metal", "widget": "color" } 
 uniform vec3 MP_Colour;
 
-//: param custom { "default": [0.940601, 0.774227, 0.329729], "label": "Metal Secondary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.940601, 0.774227, 0.329729], "label": "Metal Secondary Colour", "group": "Baldur's Gate 3/Colour/Metal", "widget": "color" } 
 uniform vec3 MS_Colour;
 
-//: param custom { "default": [0.605484, 0.605484, 0.605484], "label": "Metal Tertiary Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.605484, 0.605484, 0.605484], "label": "Metal Tertiary Colour", "group": "Baldur's Gate 3/Colour/Metal", "widget": "color" } 
 uniform vec3 MT_Colour;
 
-//: param custom { "default": [0.147998, 0.080219, 0.089194], "label": "Accent Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [0.147998, 0.080219, 0.089194], "label": "Accent Colour", "group": "Baldur's Gate 3/Colour/Custom", "widget": "color" } 
 uniform vec3 AC_Colour;
 
-//: param custom { "default": [1.0, 1.0, 1.0], "label": "Custom 1 Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [1.0, 1.0, 1.0], "label": "Custom 1 Colour", "group": "Baldur's Gate 3/Colour/Custom", "widget": "color" } 
 uniform vec3 C1_Colour;
 
-//: param custom { "default": [1.0, 1.0, 1.0], "label": "Custom 2 Colour", "group": "BG3 Colour Settings", "widget": "color" } 
+//: param custom { "default": [1.0, 1.0, 1.0], "label": "Custom 2 Colour", "group": "Baldur's Gate 3/Colour/Custom", "widget": "color" } 
 uniform vec3 C2_Colour;
 
-//: param custom { "default": false, "label": "Colour Toggle", "group": "BG3 Colour Settings"  }
-uniform bool ColourToggle;
 
 
 // takes the MSKcloth map colours and turns it into a pure red, green, and blue image depending on the 'catagory'. (ie, cloth, leather, metal, exta)
@@ -120,14 +136,15 @@ void shade(V2F inputs)
 	vec3 MetalMasks = MSKmaskFinder(MSKcloth, vec3(0.0, 1.0, 0.5), vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5));
 	vec3 ExtraMasks = MSKmaskFinder(MSKcloth, vec3(1.0, 0.0, 0.5), vec3(0.0, 0.5, 1.0), vec3(0.5, 1.0, 0.0));
 
-  	vec3 FinalMSKColour = (
+  	vec3 FinalMSKColour = vec3(1.0);
+		
+    if(ColourToggle){
+			FinalMSKColour =(
 		(MSKmaskMix(ClothMasks, CP_Colour, CS_Colour, CT_Colour)) + 
 		(MSKmaskMix(LeatherMasks, LP_Colour, LS_Colour, LT_Colour)) +
 		(MSKmaskMix(MetalMasks, MP_Colour, MS_Colour, MT_Colour)) +
 		(MSKmaskMix(ExtraMasks, AC_Colour, C1_Colour, C2_Colour))
-	);
-		if(ColourToggle){
-			FinalMSKColour = vec3(1.0);
+	  );
 		}
   
   vec3 SourceBase = getBaseColor(basecolor_tex, inputs.sparse_coord);

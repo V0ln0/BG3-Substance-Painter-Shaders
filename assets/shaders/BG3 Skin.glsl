@@ -56,11 +56,11 @@ uniform SamplerSparse specularlevel_tex;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Hemoglobin Amount",
-//:   "group": "Skin Parameters Main"
+//:   "group": "Skin Parameters/Hemoglobin"
 //: }
 uniform float HemoglobinAmount;
 
-//: param custom { "default": [0.6523701, 0.009021491, 0.009021491], "label": "Hemoglobin Colour", "group": "Skin Parameters Main", "widget": "color" } 
+//: param custom { "default": [0.6523701, 0.009021491, 0.009021491], "label": "Hemoglobin Colour", "group": "Skin Parameters/Hemoglobin", "widget": "color" } 
 uniform vec3 HemoglobinColour;
 
 //: param custom {
@@ -68,7 +68,7 @@ uniform vec3 HemoglobinColour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Melanin Amount",
-//:   "group": "Skin Parameters Main"
+//:   "group": "Skin Parameters/Melanin"
 //: }
 uniform float MelaninAmount;
 
@@ -77,12 +77,12 @@ uniform float MelaninAmount;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Melanin Removal Amount",
-//:   "group": "Skin Parameters Main"
+//:   "group": "Skin Parameters/Melanin"
 //: }
 uniform float MelaninRemovalAmount;
 
 
-//: param custom { "default": [0.03195167, 0.007290916, 0.00140997], "label": "Melanin Colour", "group": "Skin Parameters Main", "widget": "color" } 
+//: param custom { "default": [0.03195167, 0.007290916, 0.00140997], "label": "Melanin Colour", "group": "Skin Parameters/Melanin", "widget": "color" } 
 uniform vec3 MelaninColour;
 
 //: param custom {
@@ -90,11 +90,11 @@ uniform vec3 MelaninColour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Vein Amount",
-//:   "group": "Skin Parameters Main"
+//:   "group": "Skin Parameters/Vein"
 //: }
 uniform float VeinAmount;
 
-//: param custom { "default": [0, 0.2673581, 0.585973], "label": "Vein Colour", "group": "Skin Parameters Main", "widget": "color" } 
+//: param custom { "default": [0, 0.2673581, 0.585973], "label": "Vein Colour", "group": "Skin Parameters/Vein", "widget": "color" } 
 uniform vec3 VeinColour;
 
 //: param custom {
@@ -102,26 +102,26 @@ uniform vec3 VeinColour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Yellowing Amount",
-//:   "group": "Skin Parameters Main"   
+//:   "group": "Skin Parameters/Yellowing"   
 //: }
 uniform float YellowingAmount;
 
-//: param custom { "default": [0.9866056, 0.7862425, 0.1879118], "label": "Yellowing Colour", "group": "Skin Parameters Main", "widget": "color" } 
+//: param custom { "default": [0.9866056, 0.7862425, 0.1879118], "label": "Yellowing Colour", "group": "Skin Parameters/Yellowing", "widget": "color" } 
 uniform vec3 YellowingColour;
 
-//: param custom { "default": [0.01, 0.01, 0.01], "label": "Hair Colour", "group": "Skin Parameters Main", "widget": "color" } 
+//: param custom { "default": [0.01, 0.01, 0.01], "label": "Hair Colour", "group": "Skin Parameters/Misc", "widget": "color" } 
 uniform vec3 HairColour;
 
-//: param custom { "default": false, "label": "CLEA Makeup (Lipstick) Toggle", "group": "Skin Parameters Extra"  }
+//: param custom { "default": false, "label": "CLEA Makeup (Lipstick) Toggle", "group": "Skin Parameters/Misc"  }
 uniform bool Makeup_Toggle;
 
-//: param custom { "default": [0.5, 0.5, 0.5], "label": "Makeup Colour", "group": "Skin Parameters Extra", "widget": "color" } 
+//: param custom { "default": [0.5, 0.5, 0.5], "label": "Makeup Colour", "group": "Skin Parameters/Misc", "description": "<html><head/><body><p> <b>Please Note:</b> This is referes to the blue channel in the CLEA map  </p></body></html>", "widget": "color" } 
 uniform vec3 MakeupColour;
 
-//: param custom { "default": false, "label": "NonSkin Toggle", "group": "Skin Parameters Extra","description": "Mainly used for horn plates and nails" }
+//: param custom { "default": false, "label": "Non-Skin Toggle", "group": "Skin Parameters/Misc","description": "Toggles the apperance on non-skin elements, such as hornplates and nails." }
 uniform bool BMmapToggle;
 
-//: param custom { "default": [0.5, 0.5, 0.5], "label": "NonSkin Colour", "group": "Skin Parameters Extra", "widget": "color" } 
+//: param custom { "default": [0.5, 0.5, 0.5], "label": "NonSkin Colour", "group": "Skin Parameters/Misc", "widget": "color" } 
 uniform vec3 NonSkinColour;
 
 
@@ -130,11 +130,11 @@ uniform vec3 NonSkinColour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Roughness Amount",
-//:   "group": "Utilities"
+//:   "group": "Utilities/Visual"
 //: }
 uniform float RoughnessAmount;
 
-//: param custom { "default": false, "label": "Lighting Toggle", "group": "Utilities"  }
+//: param custom { "default": false, "label": "Lighting Toggle", "group": "Utilities/Visual"  }
 uniform bool LightingToggle;
 
 // !!UTILITES EXPLINATION!!
@@ -147,10 +147,10 @@ uniform bool LightingToggle;
 // this thing already uses 15 channels, I refuse to use more
 
 
-//: param custom { "default": false, "label": "MSK Toggle", "group": "Utilities"  }
+//: param custom { "default": false, "label": "MSK Toggle", "group": "Utilities/MSK"  }
 uniform bool MSK_Channel_Toggle;
 
-//: param custom { "default": "", "label": "MSK/Atlas", "usage": "texture", "group": "Utilities" }
+//: param custom { "default": "", "label": "MSK/Atlas", "usage": "texture", "group": "Utilities/MSK" }
 uniform sampler2D UTL_Map_tex;
 
 //: param custom {
@@ -158,11 +158,11 @@ uniform sampler2D UTL_Map_tex;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Atlas Red Strength",
-//:   "group": "Utilities" 
+//:   "group": "Utilities/MSK" 
 //: }
 uniform float ULT_R_Influence;
 
-//: param custom { "default": [1.0, 0.0, 0.0], "label": "Utility Colour R", "group": "Utilities", "widget": "color" } 
+//: param custom { "default": [1.0, 0.0, 0.0], "label": "Utility Colour R", "group": "Utilities/MSK", "widget": "color" } 
 uniform vec3 ULT_R_Colour;
 
 //: param custom {
@@ -170,11 +170,11 @@ uniform vec3 ULT_R_Colour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Atlas Green Strength",
-//:   "group": "Utilities" 
+//:   "group": "Utilities/MSK" 
 //: }
 uniform float ULT_G_Influence;
 
-//: param custom { "default": [0.0, 1.0, 0.0], "label": "Utility Colour G", "group": "Utilities", "widget": "color" } 
+//: param custom { "default": [0.0, 1.0, 0.0], "label": "Utility Colour G", "group": "Utilities/MSK", "widget": "color" } 
 uniform vec3 ULT_G_Colour;
 
 //: param custom {
@@ -182,11 +182,11 @@ uniform vec3 ULT_G_Colour;
 //:   "min": 0.0,
 //:   "max": 1.0,
 //:   "label": "Atlas Blue Strength",
-//:   "group": "Utilities" 
+//:   "group": "Utilities/MSK" 
 //: }
 uniform float ULT_B_Influence;
 
-//: param custom { "default": [0.0, 0.0, 1.0], "label": "Utility Colour B", "group": "Utilities", "widget": "color" } 
+//: param custom { "default": [0.0, 0.0, 1.0], "label": "Utility Colour B", "group": "Utilities/MSK", "widget": "color" } 
 uniform vec3 ULT_B_Colour;
 
 
